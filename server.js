@@ -8,7 +8,6 @@ async function main() {
 }
 
 main().catch((err) => console.log(err));
-console.log('hello');
 
 app.listen(port, () => {
   console.log('server is running.');
