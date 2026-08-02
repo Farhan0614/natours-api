@@ -1,3 +1,4 @@
+import './unCaughtException.js';
 import mongoose from 'mongoose';
 import app from './app.js';
 
@@ -20,8 +21,8 @@ main();
 
 // 3. Global safety net for any asynchronous failure
 process.on('unhandledRejection', (err) => {
-  console.log(err.name, err.message);
   console.log('UNHANDLED REJECTION: Shutting down...');
+  console.log(err.name, err.message);
 
   // If the server successfully started before the error occurred, close it gracefully
   if (server) {
