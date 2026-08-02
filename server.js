@@ -7,8 +7,17 @@ async function main() {
   console.log('DB connection successful!');
 }
 
-main().catch((err) => console.log(err));
+main();
+// .catch((err) => console.log('ERROR', err));
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('server is running.');
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
+  console.log('UNHANDLED REJECTION: Shutting down...');
+  server.close(() => {
+    process.exit(1);
+  });
 });
