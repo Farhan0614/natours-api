@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema({
     },
   },
 });
-console.log('implementing jwt token');
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return;
