@@ -1,0 +1,29 @@
+import mongoose from 'mongoose';
+import validator from 'validator';
+
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Please provide your name'],
+  },
+  email: {
+    type: String,
+    required: [true, 'Please provide your email'],
+    unique: true,
+    lowerCase: true,
+    validate: [validator.isEmail, 'Please provide a valid email'],
+  },
+  photo: String,
+  password: {
+    type: String,
+    required: [true, 'Please provide a password'],
+    minLength: 8,
+  },
+  confirmPassword: {
+    type: String,
+    required: [true, 'Please confirm your password'],
+  },
+});
+
+const User = mongoose.model('User', userSchema);
+export default User;
