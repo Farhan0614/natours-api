@@ -49,3 +49,28 @@ export const login = catchAsync(async (req, res, next) => {
     token,
   });
 });
+
+export const protect = catchAsync(async (req, res, next) => {
+  let token;
+  // getting token and check if its there
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  console.log(token);
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! please login to get access.'),
+    );
+  }
+  // verification token
+
+  // check user is still there
+
+  // check if user changed password after the token was issued
+
+  next();
+});
