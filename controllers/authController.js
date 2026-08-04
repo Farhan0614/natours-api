@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import catchAsync from '../utils/catchAsync.js';
 import AppError from '../utils/appError.js';
+import { promisify } from 'util';
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -59,18 +60,31 @@ export const protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-  console.log(token);
 
   if (!token) {
     return next(
       new AppError('You are not logged in! please login to get access.'),
     );
   }
+
   // verification token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   // check user is still there
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser)
+    return next(
+      new AppError('the user belonging to this token does no longer exist.'),
+    );
 
   // check if user changed password after the token was issued
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password! Please login again.', 401),
+    );
+  }
 
+  // Grant access  to the protected route
+  req.user = currentUser;
   next();
 });
