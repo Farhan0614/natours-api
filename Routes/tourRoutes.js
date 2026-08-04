@@ -25,4 +25,4 @@ tourRouter
   .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour);
 
 export default tourRouter;
-// commit no 3
+// commit no 4
