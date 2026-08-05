@@ -190,4 +190,4 @@ export const updatePassword = catchAsync(async (req, res, next) => {
   // 4) login user and sent jwt
   createSendToken(user, 200, res);
 });
-// push2
+// push3
