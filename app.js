@@ -6,6 +6,8 @@ import AppError from './utils/appError.js';
 import { globalErrorHandler } from './controllers/errorController.js';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
+import { xss } from 'express-xss-sanitizer';
 
 const app = express();
 // Global Middlewares
@@ -29,6 +31,24 @@ app.use('/api', limiter);
 
 // body parser reading the body from the request req.body
 app.use(express.json({ limit: '10kb' }));
+
+// --- ADD THIS FIX FOR EXPRESS 5 ---
+app.use((req, res, next) => {
+  Object.defineProperty(req, 'query', {
+    value: { ...req.query },
+    writable: true,
+    configurable: true,
+    enumerable: true,
+  });
+  next();
+});
+// ----------------------------------
+
+// data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// data sanitization against XSS
+app.use(xss());
 
 // serving static files
 app.use(express.static('./public'));
