@@ -65,7 +65,7 @@ export const protect = catchAsync(async (req, res, next) => {
 
   if (!token) {
     return next(
-      new AppError('You are not logged in! please login to get access.'),
+      new AppError('You are not logged in! please login to get access.', 401),
     );
   }
 
@@ -190,4 +190,3 @@ export const updatePassword = catchAsync(async (req, res, next) => {
   // 4) login user and sent jwt
   createSendToken(user, 200, res);
 });
-// push3
