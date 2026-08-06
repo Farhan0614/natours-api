@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (!this.isModified('password')) return;
 
   this.password = await bcrypt.hash(this.password, 12);
@@ -61,14 +61,14 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function () {
   if (!this.isModified('password') || this.isNew) return;
 
   this.passwordChangesAt = Date.now() - 1000;
   return;
 });
 
-userSchema.pre(/^find/, function () {
+userSchema.pre(/^find/, async function () {
   this.find({ active: { $ne: false } });
 });
 
