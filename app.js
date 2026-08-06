@@ -4,12 +4,23 @@ import tourRouter from './Routes/tourRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import AppError from './utils/appError.js';
 import { globalErrorHandler } from './controllers/errorController.js';
+import { rateLimit } from 'express-rate-limit';
 
 const app = express();
+
+// Global Middlewares
 app.set('query parser', 'extended');
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 100,
+  message: 'Too many requests from this IP, please try again in an hour.',
+});
+app.use(limiter);
+
 app.use(express.json());
 
 app.use(express.static('./public'));
