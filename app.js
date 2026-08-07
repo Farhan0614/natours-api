@@ -8,6 +8,7 @@ import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 import { xss } from 'express-xss-sanitizer';
+import hpp from 'hpp';
 
 const app = express();
 // Global Middlewares
@@ -49,6 +50,20 @@ app.use(mongoSanitize());
 
 // data sanitization against XSS
 app.use(xss());
+
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
 
 // serving static files
 app.use(express.static('./public'));
