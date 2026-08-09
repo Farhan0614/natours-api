@@ -31,7 +31,6 @@ const reviewSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   },
 );
-
 // Query Middlewares
 reviewSchema.pre(/^find/, async function () {
   // this.populate({
