@@ -5,7 +5,7 @@ import {
   getAllReviews,
 } from '../controllers/reviewController.js';
 
-const reviewRouter = express.Router();
+const reviewRouter = express.Router({ mergeParams: true });
 
 reviewRouter
   .route('/')
