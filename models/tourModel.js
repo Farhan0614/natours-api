@@ -167,46 +167,6 @@ tourSchema.post(/^find/, function (docs) {
 tourSchema.pre('aggregate', function () {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
   console.log(this.pipeline());
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
-
-// Aggregation Middleware
-tourSchema.pre('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
-
-// Aggregation Middleware
-tourSchema.pre('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
-
-// Aggregation Middleware
-tourSchema.pre('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
-
-// Aggregation Middleware
-tourSchema.pre('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
-
-// Aggregation Middleware
-tourSchema.pre('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-  console.log(this.pipeline());
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
