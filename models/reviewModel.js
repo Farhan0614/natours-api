@@ -45,6 +45,45 @@ reviewSchema.pre(/^find/, async function () {
     select: 'name photo',
   });
 });
+reviewSchema.pre(/^find/, async function () {
+  // this.populate({
+  //   path: 'tour',
+  //   select: 'name',
+  // }).populate({
+  //   path: 'user',
+  //   select: 'name photo',
+  // });
+  this.populate({
+    path: 'user',
+    select: 'name photo',
+  });
+});
+reviewSchema.pre(/^find/, async function () {
+  // this.populate({
+  //   path: 'tour',
+  //   select: 'name',
+  // }).populate({
+  //   path: 'user',
+  //   select: 'name photo',
+  // });
+  this.populate({
+    path: 'user',
+    select: 'name photo',
+  });
+});
+reviewSchema.pre(/^find/, async function () {
+  // this.populate({
+  //   path: 'tour',
+  //   select: 'name',
+  // }).populate({
+  //   path: 'user',
+  //   select: 'name photo',
+  // });
+  this.populate({
+    path: 'user',
+    select: 'name photo',
+  });
+});
 
 const Review = mongoose.model('Review', reviewSchema);
 
