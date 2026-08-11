@@ -65,6 +65,318 @@ app.use(
     ],
   }),
 );
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
+// preventing parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'maxGroupSize',
+      'difficulty',
+      'ratingsAverage',
+      'ratingsQuantity',
+      'price',
+    ],
+  }),
+);
 
 // serving static files
 app.use(express.static('./public'));
