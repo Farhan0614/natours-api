@@ -16,6 +16,19 @@ export const getAllReviews = catchAsync(async (req, res, next) => {
   });
 });
 
+export const getReview = catchAsync(async (req, res, next) => {
+  const review = await Review.findById(req.params.id);
+  if (!review) {
+    return next(new AppError('No review found with that ID', 404));
+  }
+  res.status(200).json({
+    status: 'success',
+    data: {
+      review,
+    },
+  });
+});
+
 export const createReview = catchAsync(async (req, res, next) => {
   // Allow nested routes
   if (!req.body.tour) req.body.tour = req.params.tourId;
