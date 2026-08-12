@@ -47,6 +47,8 @@ reviewSchema.pre(/^find/, async function () {
   });
 });
 
+reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
+
 reviewSchema.statics.calcAverageRatings = async function (tourId) {
   const stats = await this.aggregate([
     {
