@@ -1,7 +1,7 @@
 import User from '../models/userModel.js';
 import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
-import { deleteOne, updateOne } from './handlerFactory.js';
+import { deleteOne, getAll, getOne, updateOne } from './handlerFactory.js';
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -10,19 +10,6 @@ const filterObj = (obj, ...allowedFields) => {
   });
   return newObj;
 };
-
-export const getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
 
 export const updateMe = catchAsync(async (req, res, next) => {
   // send error if user post password
@@ -61,21 +48,15 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-export const getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Route not implemented yet.',
-  });
-};
-
 export const createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'Route not implemented yet.',
+    message: 'This route is not defined. Please use /signup to create user.',
   });
 };
 
+export const getAllUsers = getAll(User);
+export const getUser = getOne(User);
 // do not update password with that (because safe middleware does not run on update)
 export const updateUser = updateOne(User);
-
 export const deleteUser = deleteOne(User);

@@ -4,6 +4,7 @@ import {
   createReview,
   deleteReview,
   getAllReviews,
+  getReview,
   setTourUserIds,
   updateReview,
 } from '../controllers/reviewController.js';
@@ -16,6 +17,10 @@ reviewRouter
   .get(getAllReviews)
   .post(protect, restrictTo('user'), setTourUserIds, createReview);
 
-reviewRouter.route('/:id').patch(updateReview).delete(deleteReview);
+reviewRouter
+  .route('/:id')
+  .get(getReview)
+  .patch(updateReview)
+  .delete(deleteReview);
 
 export default reviewRouter;
