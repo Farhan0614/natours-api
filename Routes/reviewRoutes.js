@@ -4,6 +4,7 @@ import {
   createReview,
   deleteReview,
   getAllReviews,
+  updateReview,
 } from '../controllers/reviewController.js';
 
 const reviewRouter = express.Router({ mergeParams: true });
@@ -14,6 +15,6 @@ reviewRouter
   .get(getAllReviews)
   .post(protect, restrictTo('user'), createReview);
 
-reviewRouter.route('/:id').delete(deleteReview);
+reviewRouter.route('/:id').patch(updateReview).delete(deleteReview);
 
 export default reviewRouter;
