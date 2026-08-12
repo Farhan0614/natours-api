@@ -2,7 +2,7 @@ import Tour from '../models/tourModel.js';
 import APIFeatures from '../utils/apiFeatures.js';
 import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
-import { deleteOne, updateOne } from './handlerFactory.js';
+import { createOne, deleteOne, updateOne } from './handlerFactory.js';
 
 export const aliasTopTours = (req, res, next) => {
   // 1. Build the object you want
@@ -58,15 +58,7 @@ export const getTour = catchAsync(async (req, res, next) => {
   });
 });
 
-export const createTour = catchAsync(async (req, res, next) => {
-  const newTour = await Tour.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: {
-      tour: newTour,
-    },
-  });
-});
+export const createTour = createOne(Tour);
 
 export const updateTour = updateOne(Tour);
 
