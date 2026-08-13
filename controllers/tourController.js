@@ -180,24 +180,4 @@ export const getDistances = catchAsync(async (req, res, next) => {
       data: distances,
     },
   });
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: distances,
-    },
-  });
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: distances,
-    },
-  });
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: distances,
-    },
-  });
 });
-
-// api in complete
