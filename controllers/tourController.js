@@ -1,4 +1,5 @@
 import Tour from '../models/tourModel.js';
+import AppError from '../utils/appError.js';
 // import APIFeatures from '../utils/apiFeatures.js';
 import catchAsync from '../utils/catchAsync.js';
 import {
@@ -108,6 +109,34 @@ export const getMonthlyPlan = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       plan,
+    },
+  });
+});
+
+export const getToursWithin = catchAsync(async (req, res, next) => {
+  const { distance, latlng, unit } = req.params;
+  const [lat, lng] = latlng.split(',');
+  if (!lat || !lng) {
+    next(
+      new AppError(
+        'Please provide latitude and longitude in the format lat,lng',
+        400,
+      ),
+    );
+  }
+  console.log(distance, lat, lng, unit);
+
+  const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
+
+  const tours = await Tour.find({
+    startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+  });
+
+  res.status(200).json({
+    status: 'success',
+    results: tours.length,
+    data: {
+      data: tours,
     },
   });
 });
