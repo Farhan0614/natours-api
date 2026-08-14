@@ -34,6 +34,3 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
   }
 });
-
-// Learning nextjs for frontend
-// difference between client side and server side page generation
