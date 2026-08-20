@@ -7,6 +7,7 @@ import {
   getDistances,
   getMonthlyPlan,
   getTour,
+  getTourBySlug,
   getTourStats,
   getToursWithin,
   updateTour,
@@ -35,6 +36,7 @@ tourRouter
   .get(getToursWithin);
 tourRouter.route('/distances/:latlng/unit/:unit').get(getDistances);
 
+tourRouter.get('/slug/:slug', getTourBySlug);
 tourRouter
   .route('/')
   .get(getAllTours)
