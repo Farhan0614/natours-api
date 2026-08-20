@@ -1,15 +1,17 @@
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
+import mongoSanitize from 'express-mongo-sanitize';
+import { rateLimit } from 'express-rate-limit';
+import { xss } from 'express-xss-sanitizer';
+import helmet from 'helmet';
+import hpp from 'hpp';
 import morgan from 'morgan';
+import { globalErrorHandler } from './controllers/errorController.js';
+import reviewRouter from './Routes/reviewRoutes.js';
 import tourRouter from './Routes/tourRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import AppError from './utils/appError.js';
-import { globalErrorHandler } from './controllers/errorController.js';
-import { rateLimit } from 'express-rate-limit';
-import helmet from 'helmet';
-import mongoSanitize from 'express-mongo-sanitize';
-import { xss } from 'express-xss-sanitizer';
-import hpp from 'hpp';
-import reviewRouter from './Routes/reviewRoutes.js';
 
 const app = express();
 // Global Middlewares
@@ -23,6 +25,14 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// 1. Implement CORS to allow cookies from Next.js
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // Allow your Next.js app
+    credentials: true, // CRITICAL: This allows cookies to be sent across different ports
+  }),
+);
+
 // limit the requests from same api
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
@@ -33,6 +43,9 @@ app.use('/api', limiter);
 
 // body parser reading the body from the request req.body
 app.use(express.json({ limit: '10kb' }));
+
+// 3. Cookie parser, reading cookies from incoming requests
+app.use(cookieParser());
 
 // --- ADD THIS FIX FOR EXPRESS 5 ---
 app.use((req, res, next) => {
