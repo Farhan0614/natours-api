@@ -104,6 +104,15 @@ export const protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+export const logout = (req, res) => {
+  res.cookie('jwt', 'logging out', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({ status: 'success' });
+};
+
 export const restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
