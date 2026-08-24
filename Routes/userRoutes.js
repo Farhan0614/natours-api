@@ -8,6 +8,7 @@ import {
   getUser,
   updateMe,
   updateUser,
+  uploadUserPhoto,
 } from '../controllers/userController.js';
 import {
   forgetPassword,
@@ -24,7 +25,7 @@ const userRouter = express.Router();
 
 userRouter.post('/signup', signUp);
 userRouter.post('/login', login);
-userRouter.post('/logout', logout);
+userRouter.get('/logout', logout);
 userRouter.post('/forgetPassword', forgetPassword);
 userRouter.patch('/resetPassword/:token', resetPassword);
 
@@ -32,7 +33,7 @@ userRouter.patch('/resetPassword/:token', resetPassword);
 userRouter.use(protect);
 
 userRouter.patch('/updateMyPassword', updatePassword);
-userRouter.patch('/updateMe', updateMe);
+userRouter.patch('/updateMe', uploadUserPhoto, updateMe);
 userRouter.delete('/deleteMe', deleteMe);
 userRouter.get('/me', getMe, getUser);
 
