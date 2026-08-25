@@ -3,17 +3,19 @@ import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
 import { deleteOne, getAll, getOne, updateOne } from './handlerFactory.js';
 import multer from 'multer';
+import sharp from 'sharp';
 
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/img/users');
-  },
-  filename: (req, file, cb) => {
-    const ext = file.originalname.split('.').pop();
-    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-  },
-});
+// const multerStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/img/users');
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = file.originalname.split('.').pop();
+//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+//   },
+// });
 
+const multerStorage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
   const isMimeTypeImage = file.mimetype.startsWith('image');
   const isExtensionImage = file.originalname.match(/\.(jpg|jpeg|png|gif)$/i);
@@ -29,7 +31,25 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
+
 export const uploadUserPhoto = upload.single('photo');
+export const resizeUserPhoto = catchAsync(async (req, res, next) => {
+  // 1. If no image was uploaded, skip to the next middleware
+  if (!req.file) return next();
+
+  // 2. Because we used memoryStorage, Multer DID NOT set a filename for us.
+  // We have to set it manually on the req.file object so updateMe can save it to MongoDB.
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+  // 3. Image Processing Magic using Sharp!
+  await sharp(req.file.buffer)
+    .resize(500, 500) // Crops into a perfect square from the center
+    .toFormat('jpeg') // Converts everything (PNGs, GIFs) to JPEG
+    .jpeg({ quality: 90 }) // Compresses the image slightly to save space
+    .toFile(`public/img/users/${req.file.filename}`); // Writes it to your disk
+
+  next();
+});
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -40,8 +60,6 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 export const updateMe = catchAsync(async (req, res, next) => {
-  console.log(req.file);
-  console.log(req.body);
   // send error if user post password
   if (req.body.password || req.body.passwordConfirm) {
     return next(

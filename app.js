@@ -17,7 +17,11 @@ const app = express();
 // Global Middlewares
 
 // set security headers
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  }),
+);
 
 // set development environment
 app.set('query parser', 'extended');
