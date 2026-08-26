@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      color: #55c57a;
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #55c57a;
+      color: #ffffff;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to Natours!</h1>
+    <p>Hi {{FIRST_NAME}},</p>
+    <p>We're glad to have you 🎉🙏.</p>
+    <p>We're all a big family here, so make sure to upload your user photo so we get to
+      know you a bit better!</p>
+    <a href="{{URL}}" class="btn" style="color: white;">Upload User Photo</a>
+    <p>If you need any help with booking your next tour, please don't hesitate to contact us!</p>
+
+    <div class="footer">
+      <p>Natours Inc, 123 Adventure Road, San Francisco CA</p>
+    </div>
+  </div>
+</body>
+
+</html>
