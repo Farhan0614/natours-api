@@ -12,6 +12,7 @@ import reviewRouter from './Routes/reviewRoutes.js';
 import tourRouter from './Routes/tourRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import AppError from './utils/appError.js';
+import bookingRouter from './Routes/bookingRoutes.js';
 
 const app = express();
 // Global Middlewares
@@ -102,6 +103,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/booking', bookingRouter);
 
 app.use((req, res, next) => {
   // res.status(404).json({
