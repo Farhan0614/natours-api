@@ -2,6 +2,15 @@
 import Stripe from 'stripe';
 import Tour from '../models/tourModel.js';
 import catchAsync from '../utils/catchAsync.js';
+import Booking from '../models/bookingModel.js';
+import AppError from '../utils/appError.js';
+import {
+  createOne,
+  deleteOne,
+  getAll,
+  getOne,
+  updateOne,
+} from './handlerFactory.js';
 
 export const getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the currently booked tour
@@ -45,3 +54,42 @@ export const getCheckoutSession = catchAsync(async (req, res, next) => {
     session,
   });
 });
+
+export const createMyBooking = catchAsync(async (req, res, next) => {
+  const { tour, user, price } = req.body;
+
+  if (!tour || !user || !price) {
+    return next(new AppError('Incomplete booking data', 400));
+  }
+
+  await Booking.create({ tour, user, price });
+
+  res.status(201).json({
+    status: 'success',
+    message: 'Booking successfully created',
+  });
+});
+
+export const getMyBookings = catchAsync(async (req, res, next) => {
+  // 1) Find all bookings for the currently logged in user
+  const bookings = await Booking.find({ user: req.user.id });
+
+  // 2) Extract just the tour data from those bookings
+  const tourIDs = bookings.map((el) => el.tour.id);
+
+  const tours = await Tour.find({ _id: { $in: tourIDs } });
+
+  res.status(200).json({
+    status: 'success',
+    results: tours.length,
+    data: {
+      data: tours,
+    },
+  });
+});
+
+export const createBooking = createOne(Booking);
+export const getBooking = getOne(Booking);
+export const getAllBooking = getAll(Booking);
+export const updateBooking = updateOne(Booking);
+export const deleteBooking = deleteOne(Booking);
