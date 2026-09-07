@@ -1,6 +1,7 @@
 import express from 'express';
 import { protect, restrictTo } from '../controllers/authController.js';
 import {
+  checkIfBooked,
   createReview,
   deleteReview,
   getAllReviews,
@@ -17,7 +18,7 @@ reviewRouter.use(protect);
 reviewRouter
   .route('/')
   .get(getAllReviews)
-  .post(restrictTo('user'), setTourUserIds, createReview);
+  .post(restrictTo('user'), setTourUserIds, checkIfBooked, createReview);
 
 reviewRouter
   .route('/:id')

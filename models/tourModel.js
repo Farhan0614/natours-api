@@ -71,7 +71,7 @@ const tourSchema = new mongoose.Schema(
     images: [String],
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     startDates: [Date],
@@ -164,9 +164,9 @@ tourSchema.pre(/^find/, async function () {
   });
 });
 
-tourSchema.post(/^find/, function (docs) {
-  console.log(`Query took ${Date.now() - this.start} millisecond`);
-});
+// tourSchema.post(/^find/, function (docs) {
+//   console.log(`Query took ${Date.now() - this.start} millisecond`);
+// });
 
 // Aggregation Middleware
 // tourSchema.pre('aggregate', function () {

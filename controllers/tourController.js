@@ -209,7 +209,7 @@ export const getToursWithin = catchAsync(async (req, res, next) => {
       ),
     );
   }
-  console.log(distance, lat, lng, unit);
+  // console.log(distance, lat, lng, unit);
 
   const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
 
