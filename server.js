@@ -1,3 +1,8 @@
+import dns from 'dns';
+if (process.env.NODE_ENV === 'development') {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+}
+
 import './unCaughtException.js';
 import mongoose from 'mongoose';
 import app from './app.js';
@@ -7,7 +12,11 @@ let server; // Declare it globally so process.on can access it!
 
 async function main() {
   // 1. First, wait for the database connection to succeed
-  await mongoose.connect(process.env.LOCAL_DATABASE);
+  const DB = process.env.DATABASE.replace(
+    '<PASSWORD>',
+    process.env.DATABASE_PASSWORD,
+  );
+  await mongoose.connect(DB);
   console.log('DB connection successful!');
 
   // 2. Only start the server AFTER the DB is connected

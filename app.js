@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 // 1. Implement CORS to allow cookies from Next.js
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Allow your Next.js app
+    origin: process.env.FRONTEND_URL, // Allow your Next.js app
     credentials: true, // CRITICAL: This allows cookies to be sent across different ports
   }),
 );
