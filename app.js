@@ -26,6 +26,7 @@ app.use(
 
 // set development environment
 app.set('query parser', 'extended');
+app.set('trust proxy', 1);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
