@@ -49,10 +49,17 @@ export const signUp = catchAsync(async (req, res, next) => {
   // const url = `${req.protocol}://${req.get('host')}/me`;
   const url = `${process.env.FRONTEND_URL}/me`;
 
-  // Await the email send
-  await new Email(newUser, url).sendWelcome();
-
+  // 1. Send the JWT cookie + success response FIRST, so the client can
+  //    redirect immediately. A slow or broken email provider must never
+  //    block (or fail) the signup itself.
   createSendToken(newUser, 201, res);
+
+  // 2. Fire-and-forget the welcome email in the background.
+  //    .catch() so an SMTP failure only logs an error instead of
+  //    crashing the process via an unhandled rejection.
+  new Email(newUser, url)
+    .sendWelcome()
+    .catch((err) => console.error('Welcome email failed:', err.message));
 });
 
 export const login = catchAsync(async (req, res, next) => {
